@@ -3,7 +3,7 @@
 ## Student Details
 
 - **Student Name:** Nanda Kishore
-- **Registration Number:** N25H03A1322
+- **Registration Number:** 252U1R9129
 - **Section:** CSE GEN AI (2C)
 - **Course:** Backend Development Fundamentals
 - **Academic Term:** Year II – Term II
