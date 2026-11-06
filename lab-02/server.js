@@ -57,10 +57,10 @@ app.get('/books/:bookId/', async (request, response) => {
   const getBookQuery = `
     SELECT *
     FROM book
-    WHERE id = ?;
+    WHERE id = ${bookId};
   `
 
-  const book = await db.get(getBookQuery, [bookId])
+  const book = await db.get(getBookQuery)
   response.send(book)
 })
 
