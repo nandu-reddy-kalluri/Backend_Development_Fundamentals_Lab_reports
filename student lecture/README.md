@@ -3,7 +3,7 @@
 ## Student Details
 
 - **Student Name:** Nanda Kishore
-- **Registration Number:** N25H03A1322
+- **Registration Number:** 252U1R9129
 - **Section:** CSE GEN AI (2C)
 - **Course:** Backend Development Fundamentals
 - **Academic Term:** Year II – Term II
@@ -134,3 +134,24 @@ app.get('/books/:bookId', async (request, response) => {
 3. Compare the endpoints in your browser or Postman:
    - Vulnerable Exploit: `http://localhost:3000/books/vulnerable/1 OR 1=1` (Dumps all records)
    - Secure Defense: `http://localhost:3000/books/1 OR 1=1` (Returns 404 safely)
+
+
+---
+
+## 6. Screenshots & Verification
+
+### 1. Normal Request (`GET /books/1`)
+Shows normal single book retrieval.
+![Normal Request](screenshots/01-normal-request.png)
+
+### 2. Vulnerable Route - Normal Input (`GET /books/vulnerable/1`)
+Shows that the vulnerable endpoint works normally when valid input is provided.
+![Vulnerable Normal](screenshots/02-vulnerable-normal.png)
+
+### 3. SQL Injection Exploit (`GET /books/vulnerable/1 OR 1=1`)
+Demonstrates the vulnerability: `1 OR 1=1` evaluates to true, dumping the entire table.
+![SQL Injection Exploit](screenshots/03-sql-injection-exploit.png)
+
+### 4. Secure Parameterized Defense (`GET /books/1 OR 1=1` — 404 Not Found)
+Demonstrates the fix: The `?` placeholder neutralizes the attack and safely returns `404 Not Found`.
+![Secure Defense](screenshots/04-secure-parameterized-defense.png)
