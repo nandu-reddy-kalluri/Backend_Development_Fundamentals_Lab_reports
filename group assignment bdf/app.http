@@ -1,0 +1,100 @@
+### API 1: Get All Gardeners
+GET http://localhost:3000/gardeners/
+
+### API 2: Get One Specific Gardener (ID: 1)
+GET http://localhost:3000/gardeners/1/
+
+### API 2 (Not Found): Get Non-Existent Gardener (ID: 999)
+GET http://localhost:3000/gardeners/999/
+
+### API 3: Get All Plots
+GET http://localhost:3000/plots/
+
+### API 3 (Search): Search Plots by Soil Type (Query Parameter)
+GET http://localhost:3000/plots/?soil_type=Loamy
+
+### API 4: Get One Specific Plot (ID: 1)
+GET http://localhost:3000/plots/1/
+
+### API 4 (Not Found): Get Non-Existent Plot (ID: 999)
+GET http://localhost:3000/plots/999/
+
+### API 5 (Twist Test 1): Add "Plot 9" -> Expected: 201 "Plot Successfully Added"
+POST http://localhost:3000/plots/
+Content-Type: application/json
+
+{
+  "name": "Plot 9",
+  "soil_type": "Loamy",
+  "size_sq_m": 45
+}
+
+### API 5 (Twist Test 2): Add lowercase "plot 9" -> Expected: 409 "Plot 9 already exists"
+POST http://localhost:3000/plots/
+Content-Type: application/json
+
+{
+  "name": "plot 9",
+  "soil_type": "Clay",
+  "size_sq_m": 30
+}
+
+### API 5 (Validation Test): Empty Plot Name -> Expected: 400 "Invalid Plot Details"
+POST http://localhost:3000/plots/
+Content-Type: application/json
+
+{
+  "name": "",
+  "soil_type": "Loamy",
+  "size_sq_m": 25
+}
+
+### API 5 (Validation Test): Invalid Size (Negative) -> Expected: 400 "Invalid Plot Details"
+POST http://localhost:3000/plots/
+Content-Type: application/json
+
+{
+  "name": "Plot 10",
+  "soil_type": "Sandy",
+  "size_sq_m": -5
+}
+
+### API 6 (Twist Test 3): Rename Plot 2 to "PLOT 9" -> Expected: 409 "Plot 9 already exists"
+PUT http://localhost:3000/plots/2/
+Content-Type: application/json
+
+{
+  "name": "PLOT 9",
+  "soil_type": "Clay",
+  "size_sq_m": 35
+}
+
+### API 6: Update Plot 1 (Same Name - Must Not Conflict With Itself) -> Expected: 200 "Plot Updated"
+PUT http://localhost:3000/plots/1/
+Content-Type: application/json
+
+{
+  "name": "Plot 1",
+  "soil_type": "Enriched Loam",
+  "size_sq_m": 22
+}
+
+### API 6 (Not Found): Update Non-Existent Plot (ID: 999) -> Expected: 404 "Plot Not Found"
+PUT http://localhost:3000/plots/999/
+Content-Type: application/json
+
+{
+  "name": "Ghost Plot",
+  "soil_type": "Silty",
+  "size_sq_m": 10
+}
+
+### API 7: Delete a Plot (ID: 3) -> Expected: 200 "Plot Deleted"
+DELETE http://localhost:3000/plots/3/
+
+### API 7 (Not Found): Delete Non-Existent Plot (ID: 999) -> Expected: 404 "Plot Not Found"
+DELETE http://localhost:3000/plots/999/
+
+### API 8: Get Leases with Gardener and Plot Names (INNER JOIN)
+GET http://localhost:3000/leases/
+
